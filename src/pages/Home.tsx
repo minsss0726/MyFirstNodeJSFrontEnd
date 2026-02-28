@@ -44,12 +44,21 @@ const Home = () => {
   }
 
   return (
-    <div style={{ maxWidth: 600, margin: '0 auto', padding: '1.5rem' }}>
-      <h1>메모</h1>
-      <button type="button" onClick={loadMemos} disabled={loading}>
-        {loading ? '불러오는 중…' : '목록 새로고침'}
-      </button>
-      {error && <p style={{ color: 'crimson', marginTop: '0.5rem' }}>{error}</p>}
+    <div className="page-container">
+      <header className="home-header">
+        <h1>메모</h1>
+      </header>
+      <div className="home-actions">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={loadMemos}
+          disabled={loading}
+        >
+          {loading ? '불러오는 중…' : '목록 새로고침'}
+        </button>
+      </div>
+      {error && <p className="error-message">{error}</p>}
       <MemoForm onSubmit={handleCreate} />
       <MemoList memos={memos} onDelete={handleDelete} />
     </div>

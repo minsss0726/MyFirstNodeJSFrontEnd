@@ -1,15 +1,36 @@
-:root {
-  font-family: system-ui, -apple-system, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #213547;
-  background-color: #fafafa;
-}
+/* ============================================
+   Monotone Contemporary UI System (STYLE.md)
+   ============================================ */
 
+/* --- 1. Reset & Base --- */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+:root {
+  /* Color System */
+  --color-bg: #FFFFFF;
+  --color-bg-sub: #F5F5F5;
+  --color-border: #E5E5E5;
+  --color-text-primary: #111111;
+  --color-text-secondary: #666666;
+  --color-text-disabled: #AAAAAA;
+  --color-accent: #000000;
+  --color-destructive: #c62828;
+
+  /* Typography */
+  font-family: 'Pretendard', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+
+  /* Transitions */
+  --transition-duration: 180ms;
+  --transition-ease: ease-in-out;
 }
 
 body {
@@ -18,4 +39,222 @@ body {
 
 #root {
   min-height: 100vh;
+}
+
+/* --- 2. Typography Scale --- */
+h1, .text-h1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+h2, .text-h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+h3, .text-h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+p, .text-body {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-caption {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+/* --- 3. Layout --- */
+.page-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.section-gap {
+  margin-bottom: 24px;
+}
+
+.section-gap-sm {
+  margin-bottom: 16px;
+}
+
+/* --- 4. Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: opacity var(--transition-duration) var(--transition-ease);
+  border: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn-danger {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-destructive);
+}
+
+.btn-danger:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+/* --- 5. Inputs & Textareas --- */
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color var(--transition-duration) var(--transition-ease);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-disabled);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* --- 6. Cards --- */
+.card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 16px 24px;
+}
+
+.card-memo {
+  margin-bottom: 16px;
+}
+
+.card-memo:last-child {
+  margin-bottom: 0;
+}
+
+/* --- 7. Memo List --- */
+.memo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.memo-list-empty {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  padding: 24px 0;
+}
+
+.memo-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.memo-card-content {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  white-space: pre-wrap;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.memo-card-meta {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+}
+
+.memo-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* --- 8. Memo Form --- */
+.memo-form {
+  margin-bottom: 24px;
+}
+
+.memo-form .input {
+  margin-bottom: 16px;
+}
+
+.memo-form .textarea {
+  margin-bottom: 16px;
+}
+
+.memo-form .btn {
+  margin-top: 0;
+}
+
+/* --- 9. Page: Home --- */
+.home-header {
+  margin-bottom: 24px;
+}
+
+.home-actions {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.error-message {
+  color: var(--color-destructive);
+  font-size: 14px;
+  margin-top: 8px;
+  margin-bottom: 16px;
 }

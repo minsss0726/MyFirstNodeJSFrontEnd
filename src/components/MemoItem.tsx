@@ -13,11 +13,21 @@ const MemoItem = ({ memo, onDelete }: MemoItemProps) => {
   }
 
   return (
-    <li style={{ listStyle: 'none', padding: '0.75rem', border: '1px solid #eee', borderRadius: '8px', marginBottom: '0.5rem' }}>
-      <strong>{memo.title}</strong>
-      <p style={{ margin: '0.5rem 0', whiteSpace: 'pre-wrap' }}>{memo.content}</p>
-      <small style={{ color: '#666' }}>{new Date(memo.createdAt).toLocaleString('ko-KR')}</small>
-      <button type="button" onClick={handleDelete} style={{ marginLeft: '0.5rem' }}>삭제</button>
+    <li className="card card-memo">
+      <h3 className="memo-card-title">{memo.title}</h3>
+      <p className="memo-card-content">{memo.content}</p>
+      <span className="memo-card-meta text-caption">
+        {new Date(memo.createdAt).toLocaleString('ko-KR')}
+      </span>
+      <div className="memo-card-actions">
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={handleDelete}
+        >
+          삭제
+        </button>
+      </div>
     </li>
   )
 }

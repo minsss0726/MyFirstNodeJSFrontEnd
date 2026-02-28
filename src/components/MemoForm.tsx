@@ -18,23 +18,25 @@ const MemoForm = ({ onSubmit }: MemoFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
+    <form className="memo-form" onSubmit={handleSubmit}>
       <input
         type="text"
+        className="input"
         placeholder="제목"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         maxLength={200}
-        style={{ display: 'block', marginBottom: '0.5rem', padding: '0.5rem', width: '100%' }}
       />
       <textarea
+        className="textarea"
         placeholder="내용"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={3}
-        style={{ display: 'block', marginBottom: '0.5rem', padding: '0.5rem', width: '100%' }}
       />
-      <button type="submit">메모 추가</button>
+      <button type="submit" className="btn btn-primary">
+        메모 추가
+      </button>
     </form>
   )
 }
