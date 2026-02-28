@@ -1,15 +1,25 @@
+import { useState } from 'react'
 import type { Memo } from '@/types/memo'
+import type { UpdateMemoRequest } from '@/types/memo'
+import EditMemoModal from './EditMemoModal'
 
 interface MemoItemProps {
   memo: Memo
   onDelete: (id: number) => Promise<void>
+  onEdit: (id: number, body: UpdateMemoRequest) => Promise<void>
 }
 
-const MemoItem = ({ memo, onDelete }: MemoItemProps) => {
+const MemoItem = ({ memo, onDelete, onEdit }: MemoItemProps) => {
+  const [isEditOpen, setIsEditOpen] = useState(false)
+
   const handleDelete = () => {
     if (window.confirm('이 메모를 삭제할까요?')) {
       onDelete(memo.id)
     }
+  }
+
+  const handleConfirmEdit = async (id: number, body: UpdateMemoRequest) => {
+    await onEdit(id, body)
   }
 
   return (
@@ -22,12 +32,26 @@ const MemoItem = ({ memo, onDelete }: MemoItemProps) => {
       <div className="memo-card-actions">
         <button
           type="button"
+          className="btn btn-secondary"
+          onClick={() => setIsEditOpen(true)}
+        >
+          수정
+        </button>
+        <button
+          type="button"
           className="btn btn-danger"
           onClick={handleDelete}
         >
           삭제
         </button>
       </div>
+      {isEditOpen && (
+        <EditMemoModal
+          memo={memo}
+          onConfirm={handleConfirmEdit}
+          onClose={() => setIsEditOpen(false)}
+        />
+      )}
     </li>
   )
 }

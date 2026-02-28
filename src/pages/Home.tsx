@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react'
 import MemoForm from '@/components/MemoForm'
 import MemoList from '@/components/MemoList'
-import { fetchMemos, createMemo, deleteMemo } from '@/api/memoApi'
+import { fetchMemos, createMemo, updateMemo, deleteMemo } from '@/api/memoApi'
 import type { Memo } from '@/types/memo'
-import type { CreateMemoRequest } from '@/types/memo'
+import type { CreateMemoRequest, UpdateMemoRequest } from '@/types/memo'
 
 const Home = () => {
   const [memos, setMemos] = useState<Memo[]>([])
@@ -30,6 +30,16 @@ const Home = () => {
       setMemos((prev) => [created, ...prev])
     } catch (e) {
       setError(e instanceof Error ? e.message : '메모 추가에 실패했습니다.')
+    }
+  }
+
+  const handleUpdate = async (id: number, body: UpdateMemoRequest) => {
+    setError(null)
+    try {
+      const updated = await updateMemo(id, body)
+      setMemos((prev) => prev.map((m) => (m.id === id ? updated : m)))
+    } catch (e) {
+      setError(e instanceof Error ? e.message : '수정에 실패했습니다.')
     }
   }
 
@@ -60,7 +70,7 @@ const Home = () => {
       </div>
       {error && <p className="error-message">{error}</p>}
       <MemoForm onSubmit={handleCreate} />
-      <MemoList memos={memos} onDelete={handleDelete} />
+      <MemoList memos={memos} onDelete={handleDelete} onEdit={handleUpdate} />
     </div>
   )
 }
